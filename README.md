@@ -1,4 +1,4 @@
-# Scratch Bot
+# Word Puzzle Game Bot
 
 A telegram bot for a word puzzle game
 
