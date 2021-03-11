@@ -14,7 +14,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 def start(update, context):
     user = update.effective_user.id # id of the user who sent the message
     context.bot.send_message(chat_id=update.effective_chat.id, text="""
-    Welcome to COVID-19 Vaccination Tracker""")
+    Welcome to Word Puzzle Game""")
  
    
 def message(update, context):
