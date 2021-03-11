@@ -1,57 +1,18 @@
 import requests
 from session import Session
 from typing import Optional, Dict
-
-Location = {
-  "logitude": float,
-  "latitude": float,
-}
-
-Venue = {
-  "latitude": float,
-  "longitude": float,
-  "title": str,
-  "address": str,
-}
-
-# MessageEntityType = enumerate(("mention", "hashtag", "cashtag", "bot_command", "url", "email", "phone_number", "bold", "italic", "underline", "strikethrough", "code", "pre", "text_link", "text_mention"))
-
-MessageEntity = {
-  "type": str,
-  "offset": int,
-  "length": int,
-  "url": str,
-  "user": any,
-  "language": str,
-}
-
-#CaptionEntity = list[MessageEntity]
-
-Media = {
-  "type": str, #"animation" | "document" | "audio" | "video" | "photo",
-  "media": str,
-  "caption": Optional[str],
-  "parse_mode": Optional[str],
-  "caption_entities": Optional[any],
-  "thumb": Optional[str],
-  "width": Optional[int],
-  "height": Optional[int],
-  "duration": Optional[int],
-  "supports_streaming": Optional[bool],
-  "performer": Optional[str],
-  "title": Optional[str],
-  "disable_content_type_detection": Optional[bool]
-}
-
-Contact = {
-  "phoneNumber": str,
-  "firstName": str,
-}
+from type_s import Media, Message
+from axios import Axios
+from config import Config
 
 class Context:
 
   def __init__(self):
     self.session = Session()
+    self.assasin = Axios(
+      url = 'https://api.telegram.org/bot{token}'.format(token=Config['telegram_token']),
+      customHeaders = {}
+    )
 
   def sendMessage(self, text: str, options: Optional[Dict[str, any]] = {}) -> None:
     pass

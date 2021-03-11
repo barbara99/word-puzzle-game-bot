@@ -1,229 +1,68 @@
-
+from .helpers import hasKey
 
 class Event:
 
   def __init__(self, event):
-    self.rawself: {
-      "message": {
-        "messageId": int,
-        "from": {
-          "id": int,
-          "isBot": bool,
-          "firstName": str,
-          "lastName": str,
-          "languageCode": str,
-        },
-        "chat": {
-          "id": int,
-          "first_name": str,
-          "last_name": str,
-          "type": str,
-        },
-        "date": int,
-        "text": str,
-      },
-    } = {}
+    print(event)
+    self.rawself = event
+    self.isMessage: bool = True if hasKey(event, 'message') else False
+    self.message = event['message'] if self.isMessage else None
 
-    self.isMessage: bool = True
-    self.message: {
-      "text": str
-    } = {}
+    message = event['message']
 
-    self.isText: bool = True
-    self.text: str = ""
+    self.isText: bool = True if hasKey(message, 'text') else False
+    self.text = message['text'] if self.isText else None 
 
-    self.isAudio: bool = True
-    self.audio: {
-      "file_id": str,
-      "duration": int,
-      "title": str,
-    } = {}
+    self.isAudio: bool = True if hasKey(message, 'audio') else False
+    self.audio = message['audio'] if self.isAudio else None
 
-    self.isDocument: bool = True
-    self.document: {
-      "file_id": str,
-      "file_name": str,
-    } = {}
+    self.isDocument: bool = True if hasKey(message, 'document') else False
+    self.document = message['document'] if self.isDocument else None
 
-    self.isGame: bool = True
-    self.game: {
-      "title": str,
-      "description": str,
-      "photo": [
-        {
-          "file_id": str,
-          "width": int,
-          "height": int,
-        },
-        {
-          "file_id": str,
-          "width": int,
-          "height": int,
-        },
-      ],
-    } = {}
+    self.isGame: bool = True if hasKey(message, 'game') else False
+    self.game = message['game'] if self.isGame else None
 
-    self.isPhoto: bool = True
-    self.photo: list[{
-      "file_id": str,
-      "width": int,
-      "height": int,
-    }] = []
+    self.isPhoto: bool = True if hasKey(message, 'photo') else False
+    self.photo = message['photo'] if self.isPhoto else None
 
-    self.isSticker: bool = True
-    self.sticker: {
-      "file_id": str,
-      "width": int,
-      "height": int,
-    } = {}
+    self.isSticker: bool = True if hasKey(message, 'sticker') else False
+    self.sticker = message['sticker'] if self.isSticker else None
 
-    self.isVideo: bool = True
-    self.video: {
-      "file_id": str,
-      "width": int,
-      "height": int,
-      "duration": int,
-    } = {}
+    self.isVideo: bool = True if hasKey(message, 'video') else False
+    self.video = message['video'] if self.isVideo else None
 
-    self.isVoice: bool = True
-    self.voice: {
-      "file_id": str,
-      "duration": int,
-    } = {}
+    self.isVoice: bool = True if hasKey(message, 'voice') else False
+    self.voice = message['voice'] if self.isVoice else None
 
-    self.isVideoNote: bool = True
-    self.videoNote: {
-      "file_id": str,
-      "length": int,
-      "duration": int,
-    } = {}
+    self.isVideoNote: bool = True if hasKey(message, 'video_note') else False
+    self.videoNote = message['video_note'] if self.isVideoNote else None
 
-    self.isContact: bool = True
-    self.contact: {
-      "phone_number": str,
-      "first_name": str,
-    } = {}
+    self.isContact: bool = True if hasKey(message, 'contact') else False
+    self.contact = message['contact'] if self.isContact else None
 
-    self.isLocation: bool = True
-    self.location: {
-      "longitude": str,
-      "latitude": str,
-    } = {}
+    self.isLocation: bool = True if hasKey(message, 'location') else False
+    self.location = message['location'] if self.isLocation else None
 
-    self.isVenue: bool = True
-    self.venue: {
-      "location": {
-        "longitude": str,
-        "latitude": str,
-      },
-      "title": str,
-      "address": str,
-    } = {}
+    self.isVenue: bool = True if hasKey(message, 'venue') else False
+    self.venue = message['venue'] if self.isVenue else None
 
-    self.isEditedMessage: bool = True
-    self.editedMessage: {
-      "message_id": str,
-      "from": {
-        "id": int,
-        "is_bot": bool,
-        "first_name": str,
-        "last_name": str,
-        "language_code": str,
-      },
-      "chat": {
-        "id": int,
-        "first_name": str,
-        "last_name": str,
-        "language_code": str,
-      },
-      "date": int,
-      "edit_date": int,
-      "text": str,
-    } = {}
+    self.isEditedMessage: bool = True if hasKey(event, 'edited_message') else False
+    self.editedMessage = event['edited_message'] if self.isEditedMessage else None
 
-    self.isChannelPost: bool = True
-    self.channelPost: {
-      "message_id": str,
-      "chat": {
-        "id": int,
-        "title": str,
-        "type": str,
-      },
-      "date": int,
-      "text": str,
-    } = {}
+    self.isChannelPost: bool = True if hasKey(event, 'channel_post') else False
+    self.channelPost = event['channel_post'] if self.isChannelPost else None
 
-    self.isEditedChannelPost: bool = True
-    self.editedChannelPost: {
-      "message_id": str,
-      "chat": {
-        "id": int,
-        "title": str,
-        "type": str,
-      },
-      "date": int,
-      "edit_date": int,
-      "text": str,
-    } = {}
+    self.isEditedChannelPost: bool = True if hasKey(event, 'edited_channel_post') else False
+    self.edittedChannelPost = event['edited_channel_post'] if self.isEditedChannelPost else None
 
-    self.isInlineQuery: bool = True
-    self.inlineQuery: {
-      "id": int,
-      "from": {
-        "id": int,
-        "is_bot": bool,
-        "first_name": str,
-        "last_name": str,
-        "language_code": str,
-      },
-      "query": str,
-      "offset": str,
-    } = {}
+    self.isInlineQuery: bool = True if hasKey(event, 'inline_query') else False
+    self.inlineQuery = event['inline_query'] if self.isInlineQuery else None
 
-    self.isChosenInlineResult: bool = True
-    self.chosenInlineResult: {
-      "result_id": '2837258670654537434',
-      "from": {
-        "id": int,
-        "is_bot": bool,
-        "first_name": str,
-        "last_name": str,
-        "language_code": str,
-      },
-      "inline_message_id": str,
-      "query": str,
-    }
+    self.isChosenInlineResult: bool = True if hasKey(event, 'chosen_inline_result') else False
+    self.chosenInlineResult = event['chosen_inline_result'] if self.isChosenInlineResult else None
 
-    self.isCallbackQuery: bool = true
-    self.callbackQuery: {
-      "id": int,
-      "from": {
-        'id': int,
-        "is_bot": bool,
-        "first_name": str,
-        "last_name": str,
-        "language_code": str,
-      },
-      "message": {
-        "message_id": int,
-        "from": {
-          "id": int,
-          "is_bot": bool,
-          "first_name": str,
-          "username": str,
-        },
-        "chat": {
-          "id": int,
-          "first_name": str,
-          "last_name": str,
-          "type": str,
-        },
-        "date": int,
-        "text": str,
-      },
-      "chat_instance": str,
-      "data": any,
-    } = {}
+    self.isCallbackQuery: bool = True if hasKey(event, 'callback_query') else False
+    self.callbackQuery = event['callback_query'] if self.isCallbackQuery else None
 
     self.isPayload: bool = True
     self.payload: any = 'DEVELOPER_DEFINED_PAYLOAD'

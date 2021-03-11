@@ -13,7 +13,7 @@ class Axios:
     return requests.get(
       url = self.url + path,
       headers = self.headers,
-      params = {},
+      params = params,
     )
 
   def post(self, path: str = "/", data: dict = {}, **args):
@@ -46,12 +46,5 @@ class Axios:
   def head(self, path: str = "/", **args):
     return requests.head(
       url = self.url + path,
-      headers = self.headers,
-    )
-
-  def request(self, path: str = "/", method: str = "GET", **args):
-    return requests.request(
-      url = self.url + path,
-      method = method,
       headers = self.headers,
     )
