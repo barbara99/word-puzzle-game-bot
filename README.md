@@ -1,6 +1,6 @@
 # Scratch Bot
 
-A telegram bot for a guess word game
+A telegram bot for a word puzzle game
 
 ## Requirements
 
@@ -13,8 +13,8 @@ A telegram bot for a guess word game
 Clone the repo and install the dependencies.
 
 ```bash
-git clone https://github.com/barbara99/guess-word-bot.git
-cd guess-word-bot
+git clone https://github.com/barbara99/word-puzzle-game-bot.git
+cd word-puzzle-game-bot
 ```
 
 ```bash
