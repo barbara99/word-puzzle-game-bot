@@ -1,6 +1,6 @@
 # Scratch Bot
 
-A telegram bot for vaccination tracking using mysql
+A telegram bot for a guess word game
 
 ## Requirements
 
@@ -13,14 +13,14 @@ A telegram bot for vaccination tracking using mysql
 Clone the repo and install the dependencies.
 
 ```bash
-git clone https://github.com/barbara99/vaccinationbot.git
-cd vaccinationbot
+git clone https://github.com/barbara99/guess-word-bot.git
+cd guess-word-bot
 ```
 
 ```bash
 python -m pip install virtualenv
-python -m venv env
-source env/bin/activate
+python -m venv .venv
+source .venv/bin/activate
 ```
 
 ```bash
@@ -33,20 +33,14 @@ Configure environment variables
 # create an env file
 cp .example.env .env
 
-#create a python file 
-cp db_copy.py db.py
-```
-
 Open up the env file and add up telegram token
-
-Open the python file and replace "host", "user", "password", "database" 
 
 ## Running The Bot
 
 To run the bot, run the following
 
 ```bash
-python vaccinationbot.py
+python app
 ```
 
 Open [http://t.me/wordpuzzlegamebot](http://t.me/wordpuzzlegamebot) and play around.
