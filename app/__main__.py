@@ -1,31 +1,34 @@
-# load environment
-import os
-from dotenv import load_dotenv
-load_dotenv()
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-import logging
+from config import config
+from axios import Axios
 
-updater = Updater(token=os.getenv('TELEGRAM_TOKEN'), use_context=True)
+assasin = Axios(
+  url = "https://api.telegram.org/bot{token}".format(token=config["telegram_token"]),
+  customHeaders = {}
+)
 
-dispatcher = updater.dispatcher
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+res = assasin.get(path="/setWebhook")
+print(res)
+print(res.json())
 
-#displays this to the user when the start command is executed
-def start(update, context):
-    user = update.effective_user.id # id of the user who sent the message
-    context.bot.send_message(chat_id=update.effective_chat.id, text="""
-    Welcome to Word Puzzle Game""")
- 
-   
-def message(update, context):
-    user = update.effective_user.id # id of the user who sent the message
-    context.bot.send_message(chat_id=update.effective_chat.id, text=update.message.text)
- 
- #This handles the start command   
-start_handler = CommandHandler('start', start)
-dispatcher.add_handler(start_handler)
+import api
+#from session import Session
+#from context import Context
+#from event import Event
+#from handler import Handler
 
-message_handler = MessageHandler(Filters.text & (~Filters.command), message)
-dispatcher.add_handler(message_handler)
+import tornado.ioloop
+import tornado.web
 
-updater.start_polling()
+class MainHandler(tornado.web.RequestHandler):
+  def get(self):
+    self.write("Hello, world")
+
+def createApp():
+  return tornado.web.Application([
+    (r"/", MainHandler),
+  ])
+
+if __name__ == "__main__":
+  app = createApp()
+  app.listen(5000)
+  tornado.ioloop.IOLoop.current().start()

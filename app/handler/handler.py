@@ -6,55 +6,55 @@ class Handler:
     self.name = name
   
   def onText(self):
-    return self
+    pass
 
   def onVoiceNote(self):
-    return self
+    pass
 
   def onVideo(self):
-    return self
+    pass
 
   def onContact(self):
-    return self
+    pass
 
   def onLocation(self):
-    return self
+    pass
 
   def onVenue(self):
-    return self
+    pass
 
   def onSticker(self):
-    return self
+    pass
 
   def onGame(self):
-    return self
+    pass
 
   def onAudio(self):
-    return self
+    pass
 
   def onDocument(self):
-    return self
+    pass
 
   def onPhoto(self):
-    return self
+    pass
 
   def onPayload(self):
-    return self
+    pass
 
   def onCallbackQuery(self):
-    return self
+    pass
 
   def onUnhandled(self):
-    return self
+    pass
 
   def onError(self):
-    return self
+    pass
 
   def onMessage(self):
-    return self
+    pass
 
   def on(self):
-    return self
+    pass
 
   def onEvent(self):
-    return self
+    pass
