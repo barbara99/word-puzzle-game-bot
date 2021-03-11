@@ -1,1 +1,1 @@
-worker: python vaccinationbot.py
+worker: python main.py
