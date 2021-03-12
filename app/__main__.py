@@ -3,7 +3,7 @@ from config import Config, setup
 import tornado.ioloop
 from bot import Bot
 
-port = Config['port']
+port: str = Config['port']
 
 if __name__ == '__main__':
   setup()

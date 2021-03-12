@@ -1,9 +1,9 @@
-from .helpers import hasKey
+from .helpers import hasKey, Object
 
 class Event:
 
   def __init__(self, event):
-    print(event)
+    event = Object(event)
     self.rawself = event
     self.isMessage: bool = True if hasKey(event, 'message') else False
     self.message = event['message'] if self.isMessage else None
@@ -66,3 +66,15 @@ class Event:
 
     self.isPayload: bool = True
     self.payload: any = 'DEVELOPER_DEFINED_PAYLOAD'
+
+    if self.isMessage:
+      print(self.message["chat"])
+      self.chat = self.message["chat"]
+    elif self.isEditedMessage:
+      self.chat = self.editedMessage.chat
+    elif self.isChannelPost:
+      self.chat = self.channelPost.chat
+    elif self.isEditedChannelPost:
+      self.chat = self.edittedChannelPost.chat
+    else:
+      self.chat = None

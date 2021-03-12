@@ -1,15 +1,17 @@
 import tornado.web
 import json
-from event import Event
+from type_s import Update
 from context import Context
 
 class BotHandler(tornado.web.RequestHandler):
   def post(self):
     print('updates')
-    rawEvent = json.loads(self.request.body)
-    transEvent = Event(rawEvent)
-    print(transEvent.isChannelPost)
-    self.write('Hello, world')
+    update: Update = json.loads(self.request.body)
+    context = Context(update)
+    if context.event.isText:
+      context.sendMessage(text=context.event.text)
+    self.set_status(200)
+    self.write("All Green!!!")
 
 def Bot():
   return tornado.web.Application([

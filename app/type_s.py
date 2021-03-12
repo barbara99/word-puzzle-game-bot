@@ -1,181 +1,206 @@
 # work on types
+import sys
 
-from typing import Optional, List
+if sys.version_info >= (3, 8):
+  from typing import TypedDict, List, Optional
+else:
+  from typing import List, Optional
+  from typing_extensions import TypedDict
 
-Message: dict = {}
+class Chat(TypedDict, total=False):
+  pass
 
-Chat: dict = {}
+class User(TypedDict, total=False):
+  pass
 
-User: dict = {}
+class Animation(TypedDict, total=False):
+  pass
 
-Animation: dict = {}
+class Document(TypedDict, total=False):
+  pass
 
-Document: dict = {}
+class PhotoSize(TypedDict, total=False):
+  pass
 
-PhotoSize: dict = {}
+class Sticker(TypedDict, total=False):
+  pass
 
-Sticker: dict = {}
+class Audio(TypedDict, total=False):
+  pass
 
-Video: dict = {}
+class Video(TypedDict, total=False):
+  pass
 
-VideoNote: dict = {}
+class VideoNote(TypedDict, total=False):
+  pass
 
-Voice: dict = {}
+class Voice(TypedDict, total=False):
+  pass
 
-Dice: dict = {}
+class Dice(TypedDict, total=False):
+  pass
 
-Game: dict = {}
+class Game(TypedDict, total=False):
+  pass
 
-Poll: dict = {}
+class Poll(TypedDict, total=False):
+  pass
 
-PollAnswer: dict = {}
+class PollAnswer(TypedDict, total=False):
+  pass
 
-Location: dict = {
-  "logitude": float,
-  "latitude": float,
-}
+class Location(TypedDict, total=False):
+  logitude: float
+  latitude: float
 
-Venue: dict = {
-  "latitude": float,
-  "longitude": float,
-  "title": str,
-  "address": str,
-}
+class Venue(TypedDict, total=False):
+  latitude: float
+  longitude: float
+  title: str
+  address: str
 
-# MessageEntityType = enumerate(("mention", "hashtag", "cashtag", "bot_command", "url", "email", "phone_number", "bold", "italic", "underline", "strikethrough", "code", "pre", "text_link", "text_mention"))
+# MessageEntityType: enumerate((mention hashtag cashtag bot_command url email phone_number bold italic underline strikethrough code pre text_link text_mention))
 
-MessageEntity: dict = {
-  "type": str,
-  "offset": int,
-  "length": int,
-  "url": str,
-  "user": any,
-  "language": str,
-}
+class MessageEntity(TypedDict, total=False):
+  type: str
+  offset: int
+  length: int
+  url: str
+  user: User
+  language: str
 
-#CaptionEntity = List[MessageEntity]
+class Media(TypedDict, total=False):
+  type: str #animation | document | audio | video | photo
+  media: str
+  caption: Optional[str]
+  parse_mode: Optional[str]
+  caption_entities: Optional[List[MessageEntity]]
+  thumb: Optional[str]
+  width: Optional[int]
+  height: Optional[int]
+  duration: Optional[int]
+  supports_streaming: Optional[bool]
+  performer: Optional[str]
+  title: Optional[str]
+  disable_content_type_detection: Optional[bool]
 
-Media: dict = {
-  "type": str, #"animation" | "document" | "audio" | "video" | "photo",
-  "media": str,
-  "caption": Optional[str],
-  "parse_mode": Optional[str],
-  "caption_entities": Optional[any],
-  "thumb": Optional[str],
-  "width": Optional[int],
-  "height": Optional[int],
-  "duration": Optional[int],
-  "supports_streaming": Optional[bool],
-  "performer": Optional[str],
-  "title": Optional[str],
-  "disable_content_type_detection": Optional[bool]
-}
+class Contact(TypedDict, total=False):
+  phoneNumber: str
+  firstName: str
 
-Contact: dict = {
-  "phoneNumber": str,
-  "firstName": str,
-}
+class MessageAutoDeleteTimerChanged(TypedDict, total=False):
+  pass
 
-MessageAutoDeleteTimerChanged: dict = {}
+class Invoice(TypedDict, total=False):
+  pass
 
-Invoice: dict = {}
+class SuccessfulPayment(TypedDict, total=False):
+  pass
 
-SuccessfulPayment: dict = {}
+class PassportData(TypedDict, total=False):
+  pass
 
-PassportData: dict = {}
+class ProximityAlertTriggered(TypedDict, total=False):
+  pass
 
-ProximityAlertTriggered: dict = {}
+class VoiceChatStarted(TypedDict, total=False):
+  pass
 
-VoiceChatStarted: dict = {}
+class VoiceChatEnded(TypedDict, total=False):
+  pass
 
-VoiceChatEnded: dict = {}
+class VoiceChatParticipantsInvited(TypedDict, total=False):
+  pass
 
-VoiceChatParticipantsInvited: dict = {}
+class InlineKeyboardMarkup(TypedDict, total=False):
+  pass
 
-InlineKeyboardMarkup: dict = {}
+class InlineQuery(TypedDict, total=False):
+  pass
 
-InlineQuery: dict = {}
+class ChosenInlineResult(TypedDict, total=False):
+  pass
 
-ChosenInlineResult: dict = {}
+class CallbackQuery(TypedDict, total=False):
+  pass
 
-CallbackQuery: dict = {}
+class ChatMemberUpdated(TypedDict, total=False):
+  pass
 
-ChatMemberUpdated: dict = {}
+class ShippingQuery(TypedDict, total=False):
+  pass
 
-ShippingQuery: dict = {}
+class PreCheckoutQuery(TypedDict, total=False):
+  pass
 
-PreCheckoutQuery: dict = {}
+class Message(TypedDict, total=False):
+  message_id: int
+  _from: User
+  sender_chat: Chat
+  date: int
+  chat: Chat
+  forward_from: User
+  forward_from_chat: Chat
+  forward_from_message_id: int
+  forward_signature: str
+  forward_sender_name: str
+  forward_date: int
+  reply_to_message: any
+  via_bot: User
+  edit_date: int
+  media_group_id: str
+  author_signature: str
+  text: str
+  entities: List[MessageEntity]
+  animation: Animation
+  audio: Audio
+  document: Document
+  photo: List[PhotoSize]
+  sticker: Sticker
+  video: Video
+  video_note: VideoNote
+  voice: Voice
+  caption: str
+  caption_entities: List[MessageEntity]
+  contact: Contact
+  dice: Dice
+  game: Game
+  poll: Poll
+  venue: Venue
+  new_chat_members: List[User]
+  left_chat_member: User
+  new_chat_title: str
+  new_chat_photo: List[PhotoSize]
+  delete_chat_photo: bool
+  group_chat_created: bool
+  supergroup_chat_created: bool
+  channel_chat_created: bool
+  message_auto_delete_timer_changed: MessageAutoDeleteTimerChanged
+  migrate_to_chat_id: int
+  migrate_from_chat_id: int
+  pinned_message: any
+  invoice: Invoice
+  successful_payment: SuccessfulPayment
+  connected_website: str
+  passport_data: PassportData
+  proximity_alert_triggered: ProximityAlertTriggered
+  voice_chat_started: VoiceChatStarted
+  voice_chat_ended: VoiceChatEnded
+  voice_chat_participants_invited: VoiceChatParticipantsInvited
+  reply_markup: InlineKeyboardMarkup
 
-Message: dict = {
-  "message_id": int,
-  "from": User,
-  "sender_chat": Chat,
-  "date": int,
-  "chat": Chat,
-  "forward_from": User,
-  "forward_from_chat": Chat,
-  "forward_from_message_id": int,
-  "forward_signature": str,
-  "forward_sender_name": str,
-  "forward_date": int,
-  "reply_to_message": Message,
-  "via_bot": User,
-  "edit_date": int,
-  "media_group_id": str,
-  "author_signature": str,
-  "text": str,
-  "entities": List[MessageEntity],
-  "animation": Animation,
-  "audio": Audio,
-  "document": Document,
-  "photo": List[PhotoSize],
-  "sticker": Sticker,
-  "video": Video,
-  "video_note": VideoNote,
-  "voice": Voice,
-  "caption": str,
-  "caption_entities": List[MessageEntity],
-  "contact": Contact,
-  "dice": Dice,
-  "game": Game,
-  "poll": Poll,
-  "venue": Venue,
-  "new_chat_members": List[User],
-  "left_chat_member": User,
-  "new_chat_title": str,
-  "new_chat_photo": List[PhotoSize],
-  "delete_chat_photo": bool,
-  "group_chat_created": bool,
-  "supergroup_chat_created": bool,
-  "channel_chat_created": bool,
-  "message_auto_delete_timer_changed": MessageAutoDeleteTimerChanged,
-  "migrate_to_chat_id": int,
-  "migrate_from_chat_id": int,
-  "pinned_message": Message,
-  "invoice": Invoice,
-  "successful_payment": SuccessfulPayment,
-  "connected_website": str,
-  "passport_data": PassportData,
-  "proximity_alert_triggered": ProximityAlertTriggered,
-  "voice_chat_started": VoiceChatStarted,
-  "voice_chat_ended": VoiceChatEnded,
-  "voice_chat_participants_invited": VoiceChatParticipantsInvited,
-  "reply_markup": InlineKeyboardMarkup,
-}
-
-Update: dict = {
-  "update_id": int,
-  "message": Message,
-  "edited_message": Message,
-  "channel_post": Message,
-  "edited_channel_post": Message,
-  "inline_query": InlineQuery,
-  "chosen_inline_result": ChosenInlineResult,
-  "callback_query": CallbackQuery,
-  "poll": Poll,
-  "poll_answer": PollAnswer,
-  "my_chat_member": ChatMemberUpdated,
-  "chat_member": ChatMemberUpdated,
-  "shipping_query": ShippingQuery,
-  "pre_checkout_query": PreCheckoutQuery,
-}
+class Update(TypedDict, total=False):
+  update_id: int
+  message: Message
+  edited_message: Message
+  channel_post: Message
+  edited_channel_post: Message
+  inline_query: InlineQuery
+  chosen_inline_result: ChosenInlineResult
+  callback_query: CallbackQuery
+  poll: Poll
+  poll_answer: PollAnswer
+  my_chat_member: ChatMemberUpdated
+  chat_member: ChatMemberUpdated
+  shipping_query: ShippingQuery
+  pre_checkout_query: PreCheckoutQuery
