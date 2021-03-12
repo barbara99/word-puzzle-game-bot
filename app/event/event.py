@@ -68,13 +68,12 @@ class Event:
     self.payload: any = 'DEVELOPER_DEFINED_PAYLOAD'
 
     if self.isMessage:
-      print(self.message["chat"])
       self.chat = self.message["chat"]
     elif self.isEditedMessage:
-      self.chat = self.editedMessage.chat
+      self.chat = self.editedMessage["chat"]
     elif self.isChannelPost:
-      self.chat = self.channelPost.chat
+      self.chat = self.channelPost["chat"]
     elif self.isEditedChannelPost:
-      self.chat = self.edittedChannelPost.chat
+      self.chat = self.edittedChannelPost["chat"]
     else:
       self.chat = None
