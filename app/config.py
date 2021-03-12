@@ -25,7 +25,6 @@ def setup():
       customHeaders = {}
     )
     res = assasin.get(path='/setWebhook', params={'url': Config['webhook_url']})
-    print(res.status_code)
     print(res.json())
   except err:
     print(err)
