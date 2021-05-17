@@ -13,7 +13,29 @@ class BotHandler(tornado.web.RequestHandler):
     self.set_status(200)
     self.write("All Green!!!")
 
+class WhatsappBotHandler(tornado.web.RequestHandler):
+  def post(self):
+    print('updates')
+    update: Update = json.loads(self.request.body)
+    context = Context(update)
+    if context.event.isText:
+      context.sendMessage(text=context.event.text)
+    self.set_status(200)
+    self.write("All Green!!!")
+
+class MessengerBotHandler(tornado.web.RequestHandler):
+  def post(self):
+    print('updates')
+    update: Update = json.loads(self.request.body)
+    context = Context(update)
+    if context.event.isText:
+      context.sendMessage(text=context.event.text)
+    self.set_status(200)
+    self.write("All Green!!!")
+
 def Bot():
   return tornado.web.Application([
     (r'/webhook/telegram', BotHandler),
+    (r'/webhook/whatsapp', WhatsappBotHandler),
+    (r'/webhook/messenger', MessengerBotHandler),
   ])

@@ -5,6 +5,7 @@ default_headers = {
 }
 
 class Axios:
+  
   def __init__(self, url: str, customHeaders: dict = {}):
     self.headers: dict = default_headers.update(customHeaders)
     self.url: str = url
